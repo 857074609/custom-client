@@ -699,7 +699,7 @@ jobs:
               import sys, json, base64;
               data = json.loads(base64.b64decode('${{ inputs.custom }}').decode());
               print(data.get('conn-type', 'default'))
-          " > /tmp/conn.txt
+            " > /tmp/conn.txt
           CONN_TYPE=$(cat /tmp/conn.txt)
         fi
         SANITIZED_CONN=$(echo "$CONN_TYPE" | tr -cd 'a-zA-Z0-9_.-' | tr '[:upper:]' '[:lower:]')
