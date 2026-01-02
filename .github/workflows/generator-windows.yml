@@ -695,8 +695,8 @@ jobs:
           SHORT_UUID=${CLEAN_UUID:0:4}
           CONN_TYPE="default"
           if [ -n "${{ inputs.custom }}" ]; then
-          echo "Parsing custom input..."
-          python3 -c "
+            echo "Parsing custom input..."
+            python3 -c "
       import sys, json, base64;
       data = json.loads(base64.b64decode('${{ inputs.custom }}').decode());
       print(data.get('conn-type', 'default'))
