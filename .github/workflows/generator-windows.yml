@@ -671,9 +671,7 @@ jobs:
           mkdir -p ./SignOutput
           mv ./target/release/rustdesk-portable-packer.exe "./SignOutput/rustdesk.exe"
 
-      - name: Install NSIS
-        run: |
-          choco install -y nsis --no-progress
+  
       
       - name: Prepare NSIS script
         shell: bash
