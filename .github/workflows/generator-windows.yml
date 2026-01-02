@@ -690,24 +690,24 @@ jobs:
         shell: bash
         run: |
           RAW_UUID="${{ github.event.inputs.uuid }}"
-           CLEAN_UUID=$(echo "$RAW_UUID" | tr -d '-')
-           SHORT_UUID=${CLEAN_UUID:0:4}
-           CONN_TYPE="default"
-           if [ -n "${{ inputs.custom }}" ]; then
-             echo "Parsing custom input..."
-             python3 -c "
-               import sys, json, base64;
-               data = json.loads(base64.b64decode('${{ inputs.custom }}').decode());
-               print(data.get('conn-type', 'default'))
-             " > /tmp/conn.txt
+          CLEAN_UUID=$(echo "$RAW_UUID" | tr -d '-')
+          SHORT_UUID=${CLEAN_UUID:0:4}
+          CONN_TYPE="default"
+          if [ -n "${{ inputs.custom }}" ]; then
+               echo "Parsing custom input..."
+               python3 -c "
+                 import sys, json, base64;
+                 data = json.loads(base64.b64decode('${{ inputs.custom }}').decode());
+                 print(data.get('conn-type', 'default'))
+               " > /tmp/conn.txt
            CONN_TYPE=$(cat /tmp/conn.txt)
-        fi
-        SANITIZED_CONN=$(echo "$CONN_TYPE" | tr -cd 'a-zA-Z0-9_.-' | tr '[:upper:]' '[:lower:]')
-        NAME="${{ inputs.filename }}-${SANITIZED_CONN}-${SHORT_UUID}"
-        echo "BUILD_FILENAME=$NAME" >> "$GITHUB_ENV"
-        echo "value=$NAME" >> "$GITHUB_OUTPUT"
-        mv rustdesk-setup.exe "SignOutput/${NAME}.exe"
-        echo "Installer renamed to ${NAME}.exe"
+          fi
+          SANITIZED_CONN=$(echo "$CONN_TYPE" | tr -cd 'a-zA-Z0-9_.-' | tr '[:upper:]' '[:lower:]')
+          NAME="${{ inputs.filename }}-${SANITIZED_CONN}-${SHORT_UUID}"
+          echo "BUILD_FILENAME=$NAME" >> "$GITHUB_ENV"
+          echo "value=$NAME" >> "$GITHUB_OUTPUT"
+          mv rustdesk-setup.exe "SignOutput/${NAME}.exe"
+          echo "Installer renamed to ${NAME}.exe"
 
       - name: Sign Windows binaries (EXE and MSI)
         if: env.UPLOAD_ARTIFACT == 'true' && (success() || failure())
