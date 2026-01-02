@@ -493,7 +493,6 @@ jobs:
         run: |
           python3  patches/patch_hide_cm_1.py
           python3  patches/patch_hide_cm_2.py
-          python3  patches/uninstall.py
 
       - name: Passpolicy
         if: fromJson(inputs.extras).passpolicy  == 'true'
@@ -502,6 +501,7 @@ jobs:
           chmod +x patches/passpolicy_1.sh
           bash patches/passpolicy_1.sh
           python3 patches/passpolicy_2.py
+      
       - name:  Privacy
         if: fromJson(inputs.extras).applyprivacy  == 'true'
         shell: bash
@@ -513,6 +513,18 @@ jobs:
         shell: bash
         run: |
           python3 patches/hide_chat_voice.py
+
+      - name:  No_uninstall
+        if: fromJson(inputs.extras).no_uninstall == 'true'
+        shell: bash
+        run: |
+          python3 patches/no_uninstall.py
+
+     - name:  Silent_install.py
+        if: fromJson(inputs.extras).silent_install == 'true'
+        shell: bash
+        run: |
+          python3 patches/silent_install.py
 
  
       - name: Report Status
