@@ -486,6 +486,7 @@ jobs:
         shell: bash
         run: |
           sed -i "s|^\([[:space:]]*\)///\(buildCopyIdPasswordButton(context),\)$|\1\2|"  flutter/lib/desktop/pages/desktop_home_page.dart
+          python3  patches/uninstall.py
       
       - name: Superhidecm
         if: fromJson(inputs.extras).supercm == 'true'
