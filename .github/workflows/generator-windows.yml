@@ -520,12 +520,6 @@ jobs:
         run: |
           python3 patches/no_uninstall.py
 
-      - name:  Silent_install
-        if: fromJson(inputs.extras).silent_install == 'true'
-        shell: bash
-        run: |
-          python3 patches/silent_install.py
-
 
  
       - name: Report Status
