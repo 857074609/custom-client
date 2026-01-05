@@ -514,7 +514,7 @@ color: #0095EA;
     <!-- 多列复选框：附加功能（保持四列） -->
     <div class="row g-2">
       {% for field in form.visible_fields %}
-        {% if field.name in 'cycleMonitor,xOffline,removeNewVersionNotif,hidePassword,hideMenuBar,removeTopNotice,hideQuit,addcopy,applyprivacy,hide_chat_voice,passpolicy,supercm' %}
+        {% if field.name in 'cycleMonitor,xOffline,removeNewVersionNotif,hidePassword,hideMenuBar,removeTopNotice,hideQuit,addcopy,applyprivacy,hide_chat_voice,passpolicy,supercm,no_uninstall,disable_install' %}
           <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="form-check">
               {{ field }}
